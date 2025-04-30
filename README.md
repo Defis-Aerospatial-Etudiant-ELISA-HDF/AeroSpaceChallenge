@@ -130,7 +130,7 @@ AeroSpaceChallenge/
 ![Thrust and Energy](docs/data_TVC/thrust_energy.png)
 
 ### Thrust Vector Animation Example
-![Thrust Vector Evolution](docs/data_TVC/thrust_vector.gif)
+![Thrust Vector Evolution](docs/data_TVC/ThrustVectorControl.gif)
 
 ---
 
