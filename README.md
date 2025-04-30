@@ -109,16 +109,20 @@ AeroSpaceChallenge/
 ## 🗂️ Example Outputs
 
 ### 📈 Plots
+- `FlowProperties.png`: Evolution of flow properties over rocket nozzle
 - `pitch_control.png`: Evolution of the pitch control over time
 - `yaw_control.png`: Evolution of the yaw control over time
 - `thrust_energy.png`: Thrust components and rotational energy over time
 
 ### 🎥 Animation
-- `thrust_vector.gif`: 3D animation showing thrust vector evolution
+- `ThrustVectorControl.gif`: 3D animation showing thrust vector evolution
 
 ---
 
 ## 📈 Preview
+
+### Rocket Nozzle Flow Properties
+![Rocket Nozzle](docs/data/data_F_100.0_ISP_285.0/FlowProperties.png)
 
 ### Pitch Control Example
 ![Pitch Control](docs/data_TVC/pitch_control.png)
