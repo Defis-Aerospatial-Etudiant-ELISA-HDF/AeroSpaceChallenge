@@ -1,4 +1,4 @@
-# 🚀 AeroSpaceChallenge: Rocket Combustion Chamber, Nozzle, and Thrust Vector Control Simulation
+# 🚀 AeroSpaceChallenge: Rocket Combustion Chamber, Nozzle, Thrust Vector Control, and Cooling Simulation
 
 ---
 
@@ -6,24 +6,35 @@
 
 This Python project simulates:
 - the **physical properties** of a **combustion chamber** and **rocket nozzle** for a **nitrous oxide - ethanol** mixture,
-- the **dynamic thrust vector control (TVC)** using **PID controllers** for **pitch** and **yaw**.
+- the **dynamic thrust vector control (TVC)** using **PID controllers** for **pitch** and **yaw**,
+- the **thermal behavior and cooling efficiency** of the engine using **helical and longitudinal cooling channels**.
 
-It processes experimental data, solves compressible flow equations, applies thrust vectoring, and generates simulation results with visualizations and animations.
+
+It processes experimental data, solves compressible flow equations, applies thrust vectoring, simulates engine cooling, and generates simulation results with visualizations and animations.
+
 
 ---
 
 ## 📁 Project Structure
 
 ```
-AeroSpaceChallenge/
-├── docs/
-│   ├── data/
-│   │   └── Protoxyde d'azote - Éthanol.xlsx
-│   └── data_TVC/
-│       └── (generated images and GIF animations)
-├── src/
-│   ├── CombustionChamber_Nozzle.ipynb
-│   └── ThrustVectorControl.ipynb
+
+AeroSpaceChallenge/ 
+│
+├── docs/ 
+│ ├── data/ 
+│ │    └── Protoxyde d'azote - Éthanol.xlsx 
+│ ├── data_HeatTransfer/ 
+│ │    └── (cooling results: wall/gas temperatures, heatmaps, CSVs) 
+│ └── data_TVC/ 
+│      └── (generated images and GIF animations)
+│
+├── src/ 
+│ ├── CombustionChamber_Nozzle.ipynb 
+│ ├── CoolingSystem.ipynb 
+│ └── ThrustVectorControl.ipynb 
+├── README.md
+
 ```
 
 ---
@@ -41,6 +52,12 @@ AeroSpaceChallenge/
 - 🧮 RK4 integration for dynamic simulation.
 - 📈 Logging of angles, rates, torques, and energies over time.
 - 🎥 3D animation of the **thrust vector evolution**.
+
+### 🌡️ Cooling System Simulation
+- 🌀 Simulation of **helical** and **longitudinal** cooling channels along the engine.
+- 🔥 Calculation of **wall and gas temperatures** with and without active cooling.
+- 🧪 Thermodynamic properties computed using **CoolProp** and **Pyromat**.
+- 📊 Comparison of wall temperature profiles and evaluation of cooling efficiency.
 
 ---
 
@@ -73,6 +90,24 @@ AeroSpaceChallenge/
   - Thrust components
 - Produces a **3D animated GIF** showing real-time thrust vector orientation changes.
 
+### 3. Cooling System Simulation
+
+- Modeling of **helical cooling channels** (combustion chamber section) and **longitudinal channels** (nozzle section).
+- Calculation of the evolution of **wall** and **gas temperatures** along the engine, with and without cooling.
+- Use of **CoolProp** and **Pyromat** to estimate:
+  - Specific heat at constant pressure \( C_p \)
+  - Specific heat at constant volume \( C_v \)
+  - Adiabatic coefficient \( $\gamma$ \)
+- Assumptions:
+  - 1D heat exchange
+  - Defined heat flux between the gas and the wall
+  - Unidirectional internal flow
+- Results:
+  - Temperature mapping
+  - Comparison of wall temperatures with and without cooling
+  - Evaluation of the cooling system’s effectiveness
+
+
 ---
 
 ## 📦 Python Libraries Used
@@ -85,19 +120,26 @@ AeroSpaceChallenge/
 - [mpl_toolkits.mplot3d](https://matplotlib.org/stable/tutorials/toolkits/mplot3d.html)
 - [os](https://docs.python.org/3/library/os.html)
 - [termcolor](https://pypi.org/project/termcolor/)
+- [CoolProp](https://coolprop.org/)
+- [pyromat](https://pypi.org/project/pyromat/)
 
 ---
 
 ## 📌 Important Notes
 
 - **`Protoxyde d'azote - Éthanol.xlsx`** must be placed in `docs/data/`.
-- Output images and animation are saved in `docs/data_TVC/`.
+- Output images and animation are saved in:
+  - `docs/data_TVC/` for thrust vector control results,
+  - `docs/data_HeatTransfer/` for cooling simulation outputs.
 - Assumptions:
   - Perfect combustion
   - Isentropic flows
+  - 1D heat exchange for cooling system
   - Idealized actuator dynamics
-- Simulation results are sensitive to initial conditions and PID tuning.
-
+- Simulation results are sensitive to:
+  - Initial conditions
+  - PID tuning
+  - Cooling channel geometry and heat transfer coefficients
 ---
 
 ## ✨ Authors
@@ -110,6 +152,7 @@ AeroSpaceChallenge/
 
 ### 📈 Plots
 - `FlowProperties.png`: Evolution of flow properties over rocket nozzle
+- `HeatTransferAnalyse.png`: Wall and gas temperature evolution along the cooled engine
 - `pitch_control.png`: Evolution of the pitch control over time
 - `yaw_control.png`: Evolution of the yaw control over time
 - `thrust_energy.png`: Thrust components and rotational energy over time
@@ -122,7 +165,10 @@ AeroSpaceChallenge/
 ## 📈 Preview
 
 ### Rocket Nozzle Flow Properties
-![Rocket Nozzle](docs/data/data_F_100.0_ISP_285.0/FlowProperties.png)
+![Rocket Nozzle](docs/data/data_F_100.0_ISP_300.0/FlowProperties.png)
+
+### Heat Transfert Analysis
+![Heat Transfert](docs/data_HeatTransfer/HeatTransferAnalyse_F_100.0_ISP_300.0.png)
 
 ### Pitch Control Example
 ![Pitch Control](docs/data_TVC/pitch_control.png)
